@@ -1,0 +1,71 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "Baidu Search",
+    "line": 2,
+    "id": "baidu-search",
+    "tags": [
+      {
+        "name": "@test",
+        "line": 1
+      }
+    ],
+    "uri": "tests\\features\\New\\baidu.feature",
+    "elements": [
+      {
+        "id": "baidu-search;searching-baidu",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Searching Baidu",
+        "tags": [
+          {
+            "name": "@test",
+            "line": 1
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "I open Baidu's search page",
+            "match": {
+              "location": "tests\\step_definitions\\New\\baidu.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 550000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "the title is \"百度一下，你就知道\"",
+            "match": {
+              "location": "tests\\step_definitions\\New\\baidu.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "the Baidu search form exists",
+            "match": {
+              "location": "tests\\step_definitions\\New\\baidu.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 59000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

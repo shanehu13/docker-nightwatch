@@ -1,0 +1,69 @@
+version: '3.2'
+services:
+  chrome:
+    environment:
+      VIRTUAL_HOST: node.chrome.docker
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_INSTANCES: 5
+      NODE_MAX_SESSION: 5
+      HTTP_PROXY: 'http://10.0.75.1:7078'
+      HTTPS_PROXY: 'https://10.0.75.1:7078'
+      NO_PROXY: 'localhost,127.0.0.1,localaddress,.localdomain.com'
+    image: selenium/node-chrome-debug:3.141.5-astatine
+    ports:
+      - 5900:5900
+    links:
+      - hub
+    volumes:
+      - /dev/shm/:/dev/shm/
+
+  firefox:
+    environment:
+      VIRTUAL_HOST: node.firefox.docker
+      HUB_PORT_4444_TCP_ADDR: hub
+      HUB_PORT_4444_TCP_PORT: 4444
+      NODE_MAX_INSTANCES: 5
+      NODE_MAX_SESSION: 5
+      FF_PREF_HTTP_PROXY: 'network.proxy.http=\"http://10.0.75.1:\"'
+      NO_PROXY: 'localhost,127.0.0.1,localaddress,.localdomain.com'
+    image: selenium/node-firefox-debug:3.141.5-astatine
+    ports:
+      - 5800:5900
+    links:
+      - hub
+    volumes:
+      - /dev/shm/:/dev/shm/
+    environment:
+      NO_PROXY: localhost
+
+  hub:
+    ports:
+      - 4444:4444
+    image: selenium/hub:3.141.5-astatine
+    volumes:
+      - /dev/shm/:/dev/shm/
+
+  nightwatch:
+    build: .
+    links:
+      - chrome
+      - firefox
+      - hub
+    depends_on:
+      - chrome
+      - firefox
+      - hub
+    environment:
+      OUTPUT_FOLDER: ${OUTPUT_FOLDER}
+      DEFINITION_PATH: ${DEFINITION_PATH}
+      FEATURES_PATH: ${FEATURES_PATH}
+      SCREENSHOT_PATH: ${SCREENSHOT_PATH}
+      # LAUNCH_URL: ${LAUNCH_URL}
+      GLOBAL_JS_PATH: ${GLOBAL_JS_PATH}
+    volumes:
+      - ./tests:/app/tests:Z
+    # entrypoint: ['nightwatch']
+    privileged: true
+    shm_size: 2gb
+    tty: true

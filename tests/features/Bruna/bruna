@@ -1,0 +1,484 @@
+Feature: Bruna Functions
+    Bruna Functions
+    @homepage
+    Scenario: Open homepage
+        Given open the bruna homepage
+
+    @menu
+    Scenario Outline: Subcategory <menu_text>
+        When move mouse to the category text
+        Then the subcategory list show
+        And check subcategory name <menu_text> and url <menu_url> with index <menu_index>
+        When move mouse out of subcategory
+        Then subcategory fold again
+
+        Examples:
+            | menu_index | menu_text                   | menu_url |
+            | 0          | Literatuur & Romans         | http:    |
+            | 1          | Thrillers & spanning        | http:    |
+            | 2          | Fantasy                     | http:    |
+            | 3          | Kinderboeken                | http:    |
+            | 4          | Young adult                 | http:    |
+            | 5          | Kookboeken                  | http:    |
+            | 6          | Reizen & vrije tijd         | http:    |
+            | 7          | Kunst & cultuur             | http:    |
+            | 8          | Studieboeken                | http:    |
+            | 9          | Computer & internet         | http:    |
+            | 10         | Business & Communicatie     | http:    |
+            | 11         | Geschiedenis & Maatschappij | http:    |
+            | 12         | Alle boeken                 | http:    |
+            | 13         | Nieuw verschenen            | http:    |
+            | 14         | Te reserveren               | http:    |
+            | 15         | Spannende Boeken Weken      | http:    |
+            | 16         | Boeken top 100              | http:    |
+            | 17         | Nederlandstalige boeken     | http:    |
+            | 18         | Engelstalige boeken         | http:    |
+            | 19         | Populaire e-books           | http:    |
+            | 20         | Alle e-books                | http:    |
+
+    @logo
+    Scenario: Logo check
+        When click the logo
+        And redirect to homepage
+
+    @usp
+    Scenario: Usp check
+        Then the usp show
+        And the customer service link show
+        And the bruna folder link show
+
+    @legal_frameworks
+    Scenario: Legal frameworks
+        When click the voorwaarden link
+        Then redirect to the conditions page
+        When click the Privacy-en Cookiebeleid link
+        Then redirect to the Privacy and Cookie Policy page
+
+    @product_list_plp
+    Scenario:Product list in the PLP page
+        When enter the plp page
+        Then check the product list item title
+        And check the product list item image
+        And check the product list item price
+        When check the product list item add to wishlist button
+        Then click the add to wishlist button to add product
+        And add to wishlist success
+        When check the product list item add to cart button
+        Then click the add to cart button to add product
+        And add to cart success
+
+    @cta_in_pdp
+    Scenario Outline: CTA link in PDP page
+        When choose a <quantity> quantity and click the add to cart button
+        Then the cart icon number will show correct
+        When click the cart icon in pdp page
+        Then the product is in the cart page and info is correct
+        And clear the cart and return to the pdp page
+
+        Examples:
+            | quantity |
+            | min      |
+            | max      |
+            | middle   |
+
+    @wishlist
+    Scenario: Wishlist entrypoint
+        Given check the wishlist link in the header
+        Then add a product into wishlist
+        And click the wishlist icon to enter the wishlist page
+        And redirect to the wishlist page
+        And move product into cart
+        When click the cart icon to enter cart page
+        Then the product quantity should be right
+
+    @copyrights
+    Scenario: Copyrights
+        Then check the copyrights link text
+
+    @social_media
+    Scenario: Social media
+        Then check the social media link url
+
+    @payment_shipping_options
+    Scenario: Payment shipping options
+        Then check the payment and shipping options icon
+
+    @service_page_link
+    Scenario Outline: Service page link of <link_text>
+        Then verify the header <link_header> is not clickable
+        And check the link text of <link_text> with index <link_index>
+        And check the link url <link_url> of <link_text> with index <link_index>
+
+        Examples:
+            | link_index | link_header        | link_text                | link_url |
+            | 0          | Klantenservice     | Veelgestelde vragen      | http:    |
+            | 1          | Klantenservice     | Verzenden & retourneren  | http:    |
+            | 2          | Klantenservice     | Betalen                  | http:    |
+            | 3          | Klantenservice     | Bruna cadeaukaart        | http:    |
+            | 4          | Klantenservice     | Contact                  | http:    |
+            | 5          | Winkelen bij Bruna | De voordelen van Bruna   | http:    |
+            | 6          | Winkelen bij Bruna | Winkels & openingstijden | http:    |
+            | 7          | Winkelen bij Bruna | Assortiment in de winkel | http:    |
+            | 8          | Winkelen bij Bruna | Bruna cadeaukaart        | http:    |
+            | 9          | Winkelen bij Bruna | Servicepunten            | http:    |
+            | 10         | Over Bruna         | De organisatie           | http:    |
+            | 11         | Over Bruna         | In de pers               | http:    |
+            | 12         | Over Bruna         | Werken bij Bruna         | http:    |
+            | 13         | Over Bruna         | Franchiser worden        | http:    |
+
+    @promotional_banner
+    Scenario: Promotional banner
+        Given the promotional banner is shown
+        Then check the banner title and subtitle
+        And check the banner description
+        When click the banner CTA link
+        Then redirect to the promotional product detail page
+        And check the banner image
+
+    @recent_viewed_product
+    Scenario: Recent viewed product
+        When recent viewed product list is shown
+        Then show the message
+        When view a product and return to homepage
+        Then the viewed product list will contain the product recent viewed
+
+    @promoted_product_list
+    Scenario: Promoted product list
+        When promoted product list is shown
+        Then check the promoted product list title
+        And check the promoted product list subtitle
+        When click the promoted product list link
+        Then redirect to the promoted product list page
+
+    @cart
+    Scenario: Cart entrypoint
+        Then check the cart link on the homepage and click
+        And redirect to the cart page
+
+    @trust_buying
+    Scenario: Trust buying
+        When click the trust buying icon
+        Then redirect to the trust buying website
+
+    @hero_image_banner
+    Scenario: Hero image banner
+        Given the hero image banner is shown
+        Then check the banner text and overlay text
+        When click the CTA link text
+        Then redirect to the product detail page
+        When click the hero image
+        Then redirect to the product detail page
+
+
+    @customer_service_block
+    Scenario: Customer service block
+        Then check the customer service block icon
+        And check the customer service block title text
+        And check the customer service block title url
+        And check the customer service block description
+        And check the customer service block phone number text
+        And check the customer service block phone number url
+
+
+    @find_my_bruna_store
+    Scenario: Find my bruna store
+        Then check the find my bruna store icon
+        And check the find my bruna store title text
+        And check the find my bruna store title url
+        And check the find my bruna store description
+        And check the find my bruna store link text
+        And check the find my bruna store link url
+
+    @find_a_store_entry_point
+    Scenario: Find my bruna store
+        Then check the find store text
+        And check the find store icon
+        And check the find store url
+
+    @enter_clp
+    Scenario: Enter CLP page
+        Given enter CLP page
+
+    @subcategory_navigation
+    Scenario Outline: Subcategory <subcategory_name> navigation
+        When click the <category_name> with index <category_index>
+        Then subcategory name is <subcategory_name> with index <category_index> and <subcategory_index>
+        And the url of <subcategory_name> is <subcategory_link_url> with index <category_index> and <subcategory_index>
+
+        Examples:
+            | category_index | category_name | subcategory_index | subcategory_name        | subcategory_link_url                                            |
+            | 0              | Genres        | 0                 | Alle boeken             | https://bruna-dev-cd.bruna-tech.nl/Catalog-presentation/Default |
+            | 0              | Genres        | 1                 | Literatuur & Romans     | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 0              | Genres        | 2                 | Thriller & spanning     | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 0              | Genres        | 3                 | Fantasy                 | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 0              | Genres        | 4                 | Kinderboeken            | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 0              | Genres        | 5                 | Young adult             | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 0              | Genres        | 6                 | Kookboeken              | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 1              | Auteur        | 0                 | Spannende Boeken Weken  | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 1              | Auteur        | 1                 | Te reserveren           | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 2              | E-books       | 0                 | Alle e-books            | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 2              | E-books       | 1                 | Populaire e-books       | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 3              | Talen         | 0                 | Engelstalige boeken     | https://bruna-dev-cd.bruna-tech.nl/                             |
+            | 3              | Talen         | 1                 | Nederlandstalige boeken | https://bruna-dev-cd.bruna-tech.nl/                             |
+
+    @enter_plp_page
+    Scenario: Enter product listing page
+        Given open homepage and click the Bekijk alles link
+
+    @filter_result
+    Scenario: Filter result number
+        Given the filter result number is show
+        When choose the brand in filter
+        Then the filter result will change
+
+    @reset_filter
+    Scenario: Reset filter
+        When click the reset link
+        Given the default filter result is show
+        And choose a new brand
+        When click the reset link
+        Then the filter will be reset
+
+    @catalog_title
+    Scenario: Catalogue title in PLP page
+        When click the product in the list
+        Then enter the pdp page and click the product brand or author link
+        And return the PLP page and the catalogue title show correctly
+
+    @page_navigation
+    Scenario: Page navigation
+        Given the page number link is show
+        When click the page number link
+        Then redirect to the correct page
+        When click the left arrow
+        Then redirect to the previous page
+        When click the right arrow
+        Then redirect to the next page
+
+    @clp_list_banner
+    Scenario: Product list and banner in CLP page
+        Then the product list title is show
+        And the product list sub title is show
+        And the product title is show
+        And the product author is show
+        And the product price is show
+        And the add to wishlist button is show
+        When click the add to wishlist button
+        Then add product into wishlist successful
+        When click the Bekijk alles link
+        Then redirect to the PLP page
+        When return the CLP page
+        Then banner title is show
+        And banner subtitle is show
+        And banner description is show
+        And banner image is show
+        When check the CTA link
+        Then redirect to the PDP page
+        When click the wis alles link
+        Then clear the recent viewed product list
+
+    @process_indicator
+    Scenario: Process indicator
+        Given open the homepage
+        Then clear the cart
+        And click the cart icon
+        And check the process indicator
+
+    @breadcump
+    Scenario: Breadcump
+        Given open homepage and click a product image
+        Then the breadcump is show correct
+
+    @upselling_list
+    Scenario: Upselling list in PDP page
+        Then promoted product list should not be empty
+        And the recent view product list should contain the current product
+
+    @carousel_media
+    Scenario: Product carousel media
+        Given the carousel image thumbnails are display
+        When click on the thumbnails
+        Then the thumbnails will be surounded by red line
+        And the carousel image will show on the right
+
+    @product_title_in_pdp
+    Scenario: Product title in PDP page
+        When enter the PDP page
+        Then the product title show correctly
+        And the product author or brand show correctly
+
+    @wishlist_in_pdp
+    Scenario: Wishlist function in PDP page
+        When click the add to wishlist button in pdp page
+        Then the wishlist icon number will plus one
+        When click the wishlist icon
+        Then the product is in the wishlist page
+
+    @product_bindings
+    Scenario: Product bindings in the PDP page
+        When open the detail page of product with bindings
+        Then the bindings show correctly
+        And the bindings title and price show
+        When click the bindings
+        Then the redirect to another detail page
+
+    @product_summary
+    Scenario: Product summary in the PDP page
+        When open the PDP page
+        Then the product summary show
+        When click the show more link
+        Then the summary show completely
+
+    @product_specification
+    Scenario: Product specification in the PDP page
+        Given the product specification show
+        When click the lees meer link
+        Then the specification show completely
+
+    @free_shipping_message
+    Scenario: Free shipping message during the checkout
+        Given add product into cart and enter the cart
+        Then the free shipping message show correctly
+
+    @total_summary
+    Scenario: Order total summary in the check out flow Step 1
+        Given choose a shipping option
+        Then the product price in the summary show correct
+        And the shipping fee in the summary show correct
+        And the tax in the summary show correct
+        And the order total price is correct
+        And the giftcode option show correctly
+
+    @shipping_option
+    Scenario: Shipping option in the check out flow step 1
+        Given enter a pdp page and choose a quantity to add into cart
+        When click the cart icon to check the shipping options
+        Then the shipping option title is show
+        And the shipping option text is show
+        And the shipping option description is show
+
+    @register
+    Scenario: Register page function
+        Given open the homepage and click the Mijn Bruna in the header
+        Then the popup dialogue show
+        And check the register dialogue info
+        When click create account button
+        Then redirect to the register page
+        When click the register button
+        Then all the validation tips show correctly
+        When input the register info correctly and click the register button
+        Then will redirect to register successful page
+        And click the Mijn Bruna and check the dialogue info
+        When input the empty login info and click the login button
+        Then the validation tips show
+        When input the wrong login info and click the login button
+        Then the login failed tips show
+        When input the correct login info and click the login button
+        Then login successful
+
+    @login
+    Scenario: login with email and password
+        Given click the my account
+        Then input email and password to login
+
+    @personal_info_myaccount
+    Scenario: Personal info in my account
+        Given enter the personal info page in my account
+        Then personal info show correct
+        When update the personal info
+        Then update the personal info success
+
+    @delivery_info
+    Scenario: Delivery or shipping info in the PDP page
+        When enter the pdp page to check the delivery info
+        Then the delivery info is correct
+
+    @addressbook
+    Scenario: Addressbook in the my account
+        Given add address info
+        Then edit address info
+        And delete address info
+
+    @wishlist_account
+    Scenario: Wishlist in the my account
+        Given add a product into wishlist and go to my account
+        Then the wishlist info is correct in the my account and clear the wishlist
+        And add product again and add product into the cart from wishlist
+
+    @home_deliver_product
+    Scenario: Only home deliverable product
+        When add home deliverable product into cart
+        Then check the shipping info in the product list
+
+    @ebook_quantity
+    Scenario: Ebook quantity check
+        When open the ebook pdp page
+        Then the quanitity should be fixed
+        When add ebook into cart
+        Then check the quantity in the item list in cart page
+
+    @product_list_checkout
+    Scenario: Product list during checkout
+        When open the pdp page
+        Then verify the delivery moment
+        And add into cart and enter cart page
+        Then check the product list info
+        And verify the delivery moment in the cart page
+        And delete all the products
+
+    @delivery_moment_on_pdp_ebook
+    Scenario: Verify the delivery momoent of ebook product in the PDP page
+        When open an ebook pdp page
+        Then verify the ebook details
+        And verify the ebook delivery moment and add into cart
+
+    @product_list_checkout_ebook
+    Scenario: Product list during checkout
+        Then enter cart page tocheck the ebook product list info
+        And verify the ebook binding in the cart page
+        And delete all the ebook products
+
+    @filter_plp
+    Scenario:Filter in the PLP page
+        When enter the plp page to choose filter
+        Then check the brand filter title
+        And check the category filter title
+        And check the price filter title
+        When choose a brand filter
+        Then the brand filter result is correct
+        And click the filter reset
+        When set a price filter
+        Then the price filter result is correct
+
+    @sort_plp
+    Scenario:Sort in the PLP page
+        When choose the Prijs oplopend in the sort dropdown list
+        Then the product filter result show correct in ascending order
+        When choose the Prijs aflopend in the sort dropdown list
+        Then the product filter result show correct in descending order
+
+    @search_item
+    Scenario Outline: Search items by <type>
+        Given open the homepage and input the <keyword> and click the search button
+        Then redirect to the search result page
+        And the search result is correct when seach in <type> with <keyword> and <selector>
+
+        Examples:
+            | type    | selector                                                | keyword  |
+            | title   | span.product-title.gradient-overlay > a > span          | Provence |
+            | binding | div.price-container > a > div > div:nth-child(2) > span | E-BOOK   |
+            | author  | div.product-authors.gradient-overlay > a > ul > li      | Aurélie  |
+            | brand   | div > span.product-brand.gradient-overlay               | Atlanta  |
+    
+    @reset_password_myaccount
+    Scenario: Reset password in my account
+        Given upadate the password
+        Then login with the new password
+        When restore to the old password in my account
+        Then login with old password should be success
+        And logout success
+    
+    @shipping_store
+    Scenario: Verify the store info during check out
+        Given choose pick up in store in the cart
+        Then verify the store info in the next steps

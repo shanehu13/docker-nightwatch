@@ -1,0 +1,32 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "Bruna E2E Test",
+  "main": "index.js",
+  "scripts": {
+    "e2e:test": "cross-env environment=test nightwatch",
+    "e2e:prod": "cross-env environment=prod nightwatch",
+    "e2e:dev": "cross-env environment=dev nightwatch",
+    "e2e:acce": "cross-env environment=acce nightwatch",
+    "test:cucumber": "cucumber-js",
+    "test:debug": "node --inspect node_modules/nightwatch/bin/nightwatch",
+    "test:report": "node tests/generateReport.js",
+    "e2e-test": "cucumber-js tests/features/New --require cucumber.conf.js --require tests/step_definitions/New --format node_modules/cucumber-pretty --format json:tests/report/cucumber_report.json",
+    "e2e-report": "node tests/report/report.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chromedriver": "^75.0.0",
+    "cross-env": "^5.2.0",
+    "cucumber": "^5.1.0",
+    "cucumber-html-reporter": "^4.0.3",
+    "cucumber-junit": "^1.7.1",
+    "cucumber-pretty": "^1.4.4",
+    "dotenv": "^6.0.0",
+    "nightwatch": "^1.1.11",
+    "nightwatch-api": "^2.3.0",
+    "socks": "^2.1.6"
+  }
+}
